@@ -1,0 +1,31 @@
+p.navbar a {
+    font-weight: bold;
+    color: rgb(41, 39, 39);
+    font-size: 150%;
+}
+p.navbar {
+    margin: 20px;
+    text-align: center;
+}
+body {
+  font-family: 'Roboto', sans-serif;
+}
+img.flag {
+    margin-left: 2px;
+}
+.card {
+  max-width: 900px;
+  margin: 40px auto;
+  background: white;                     
+  border-radius: 20px;                   
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+  padding: 15px;                         /* Innenabstand = Rahmen */
+}
+
+.card img {
+  display: block;
+  max-width: 100%;   /* Bild passt sich an Card an */
+  height: auto;
+  border-radius: 12px;
+}
+
