@@ -1,0 +1,37 @@
+# Укажите ваш домен ОДИН раз
+$Domain = "yourdomain.com"
+$DomainDN = "DC=" + ($Domain -replace "\.", ",DC=")
+
+while ($true) {
+
+    # Ввод данных
+    $GivenName = Read-Host "Введите имя (GivenName)"
+    $Surname = Read-Host "Введите фамилию (Surname)"
+    $LastOU = Read-Host "Введите конечную OU ветку (например: OU=IT)"
+
+    # Формируем полный OU путь
+    $Path = "$LastOU,$DomainDN"
+
+    # Формируем имя и логины
+    $Name = "$GivenName $Surname"
+    $Sam = ($GivenName.Substring(0,1) + $Surname).ToLower()
+    $UPN = "$Sam@$Domain"
+
+    # Запрос пароля
+    $Password = Read-Host "Введите временный пароль" -AsSecureString
+
+    # Создание пользователя
+    New-ADUser `
+        -Name $Name `
+        -GivenName $GivenName `
+        -Surname $Surname `
+        -SamAccountName $Sam `
+        -UserPrincipalName $UPN `
+        -Path $Path `
+        -AccountPassword $Password `
+        -Enabled $true `
+        -ChangePasswordAtLogon $true
+
+    Write-Host "Пользователь $Name создан в $Path" -ForegroundColor Green
+    Write-Host ""
+}
